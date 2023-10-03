@@ -22,4 +22,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\MontyHall.Web.API\MontyHall.Web.API.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Mvc;
+using MontyHall.Web.API.Controllers;
+
 namespace MontyHall.Web.Test
 {
     public class MontyHallControllerUnitTest
@@ -11,10 +14,9 @@ namespace MontyHall.Web.Test
         [Fact]
         public void SimulateGames_ChangeDoor_OkResult()
         {
-            var response = _montyHallGameController.SimulateGames(numberOfSimulations = 4, changeDoor = true);
-            var objectResponse = Assert.IsType<OkObjectResult>(response);
-            var isWinner = objectResponse.Value as bool;
-            Assert.Equal(isWinner, isWinner);
+            var response = _montyHallGameController.SimulateGames(numberOfSimulations: 4, changeDoor: true);
+            Assert.IsType<OkObjectResult>(response);
+            Assert.IsType<bool>((response as OkObjectResult).Value);
         }
     }
 }
