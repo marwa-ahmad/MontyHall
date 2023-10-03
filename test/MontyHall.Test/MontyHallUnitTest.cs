@@ -24,8 +24,8 @@ namespace MontyHall.Test
         [Fact]
         public void SimulateGames_DontChangeDoor()
         {
-            IMontyHallGame montyHallGame = new MontyHallGame(numberOfSimulations = 4, changeDoor = false);
-            bool isWin = montyHallGame.SimulateGames();
+            IMontyHallGame montyHallGame = new MontyHallGame();
+            bool isWin = montyHallGame.SimulateGames(numberOfSimulations = 4, changeDoor = false);
             Assert.Equal(isWin, isWin);
         }
     }
