@@ -1,4 +1,4 @@
-![Dotnet workflow](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+![Dotnet workflow](https://github.com/github/docs/actions/workflows/main.yml/badge.svg?event=push)
 
 # Requirements
 
