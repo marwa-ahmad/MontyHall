@@ -1,22 +1,42 @@
 using Microsoft.AspNetCore.Mvc;
+using MontyHall.Service;
 using MontyHall.Web.API.Controllers;
+using MontyHall.Web.Test.TestData;
+using Moq;
 
 namespace MontyHall.Web.Test
 {
     public class MontyHallControllerUnitTest
     {
-        MontyHallGameController _montyHallGameController;
+        private readonly MontyHallGameController _montyHallGameController;
+        private readonly Mock<IMontyHallGameService> _montyHallGameService;
+
         public MontyHallControllerUnitTest()
         {
-            _montyHallGameController = new MontyHallGameController();
+            _montyHallGameService = new Mock<IMontyHallGameService>();
+            _montyHallGameController = new MontyHallGameController(_montyHallGameService.Object);
         }
 
-        [Fact]
-        public void SimulateGames_ChangeDoor_OkResult()
+        [Theory]
+        [MemberData(nameof(MontyHallTestDataGenerator.GetAllData), MemberType = typeof(MontyHallTestDataGenerator))]
+        public async Task SimulateGames_ChangeDoor_OkResult(int numberOfSimulations, bool changeDoor, bool isWinner)
         {
-            var response = _montyHallGameController.SimulateGames(numberOfSimulations: 4, changeDoor: true);
+            //Setup returns
+            _montyHallGameService.Setup(c => c.SimulateGame(numberOfSimulations, changeDoor)).Returns(isWinner);
+
+            var response = await _montyHallGameController.SimulateGames(numberOfSimulations, changeDoor);
             Assert.IsType<OkObjectResult>(response);
-            Assert.IsType<bool>((response as OkObjectResult).Value);
+            Assert.Equal(isWinner, (bool)(response as OkObjectResult).Value);
+        }
+
+        [Theory]
+        [MemberData(nameof(MontyHallTestDataGenerator.InvalidData), MemberType = typeof(MontyHallTestDataGenerator))]
+        public async Task SimulateGames_ChangeDoor_ThrowException(int numberOfSimulations, bool changeDoor)
+        {
+            //Setup returns
+            _montyHallGameService.Setup(c => c.SimulateGame(numberOfSimulations, changeDoor)).Throws(new Exception());
+
+            await Assert.ThrowsAsync(typeof(Exception), async ()=> await  _montyHallGameController.SimulateGames(numberOfSimulations, changeDoor));
         }
     }
 }
