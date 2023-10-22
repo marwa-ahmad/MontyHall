@@ -1,3 +1,5 @@
+![Dotnet workflow](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+
 # Requirements
 
 1. The concept of the game is that the player sees three closed doors behind one is a car. and behind the other two are goats.
