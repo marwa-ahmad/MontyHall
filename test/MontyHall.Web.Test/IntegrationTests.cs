@@ -19,6 +19,7 @@ namespace MontyHall.Web.Test
 
         [Theory]
         [MemberData(nameof(IntegrationTestingData.SimulateGamesOkResult), MemberType = typeof(IntegrationTestingData))]
+        [MemberData(nameof(IntegrationTestingData.SimulateGamesBadRequestResult), MemberType = typeof(IntegrationTestingData))]
         public async Task SimulateGames(int numberOfSimulations, bool changeDoor, HttpStatusCode expectedHttpStatusCode)
         {
             var response = await client.GetAsync($"/montygame/simulate?numberOfSimulations={numberOfSimulations}&changeDoor={changeDoor}");

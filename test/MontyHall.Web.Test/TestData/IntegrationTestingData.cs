@@ -31,5 +31,21 @@ namespace MontyHall.Web.Test.TestData
                 HttpStatusCode.OK,
             };
         }
+
+        public static IEnumerable<object[]> SimulateGamesBadRequestResult()
+        {
+            yield return new object[]
+            {
+                -1,
+                true,
+                HttpStatusCode.BadRequest,
+            };
+            yield return new object[]
+            {
+                0,
+                true,
+                HttpStatusCode.BadRequest,
+            };
+        }
     }
 }

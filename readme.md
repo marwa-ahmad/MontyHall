@@ -27,4 +27,8 @@ As per requirment # 6, suggested API
 - For simplicity backend randmoly choose user door in each iteration
 
 # API Documentation & trial in Swagger
+- Success response with status code 200 OK
 ![Swagger](SwaggerOutput.jpg)
+
+- BadRequest response with status code 200 OK
+![BadRequestResult](BadRequestResult.png)

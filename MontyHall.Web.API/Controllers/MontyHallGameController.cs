@@ -15,8 +15,10 @@ namespace MontyHall.Web.API.Controllers
 
         [HttpGet]
         [Route("simulate")]
-        public async Task<OkObjectResult> SimulateGames([FromQuery] int numberOfSimulations, [FromQuery] bool changeDoor)
+        public async Task<IActionResult> SimulateGames([FromQuery] int numberOfSimulations, [FromQuery] bool changeDoor)
         {
+            if (numberOfSimulations <= 0) return BadRequest("Simulations should be greater than zero");
+
             bool isWinner = await Task.Run(()=> _montyHallGameService.SimulateGame(numberOfSimulations, changeDoor));
             return Ok(isWinner);
         }

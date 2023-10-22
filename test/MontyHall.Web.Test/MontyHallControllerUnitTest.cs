@@ -31,12 +31,10 @@ namespace MontyHall.Web.Test
 
         [Theory]
         [MemberData(nameof(MontyHallTestDataGenerator.InvalidData), MemberType = typeof(MontyHallTestDataGenerator))]
-        public async Task SimulateGames_ChangeDoor_ThrowException(int numberOfSimulations, bool changeDoor)
+        public async Task SimulateGames_ChangeDoor_BadRequest(int numberOfSimulations, bool changeDoor)
         {
-            //Setup returns
-            _montyHallGameService.Setup(c => c.SimulateGame(numberOfSimulations, changeDoor)).Throws(new Exception());
-
-            await Assert.ThrowsAsync(typeof(Exception), async ()=> await  _montyHallGameController.SimulateGames(numberOfSimulations, changeDoor));
+            var result = await  _montyHallGameController.SimulateGames(numberOfSimulations, changeDoor);
+            Assert.IsType(typeof(BadRequestObjectResult), result);
         }
     }
 }
