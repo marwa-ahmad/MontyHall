@@ -19,14 +19,16 @@ namespace MontyHall.Web.Test
 
         [Theory]
         [MemberData(nameof(MontyHallTestDataGenerator.GetAllData), MemberType = typeof(MontyHallTestDataGenerator))]
-        public async Task SimulateGames_ChangeDoor_OkResult(int numberOfSimulations, bool changeDoor, bool isWinner)
+        public async Task SimulateGames_ChangeDoor_OkResult(int numberOfSimulations, bool changeDoor, bool isWinnerExpected)
         {
             //Setup returns
-            _montyHallGameService.Setup(c => c.SimulateGame(numberOfSimulations, changeDoor)).Returns(isWinner);
+            _montyHallGameService.Setup(c => c.SimulateGame(numberOfSimulations, changeDoor)).Returns(isWinnerExpected);
 
             var response = await _montyHallGameController.SimulateGames(numberOfSimulations, changeDoor);
             Assert.IsType<OkObjectResult>(response);
-            Assert.Equal(isWinner, (bool)(response as OkObjectResult).Value);
+            OkObjectResult? okObjectResult = response as OkObjectResult;
+            Assert.NotNull(okObjectResult);
+            Assert.Equal(isWinnerExpected, (bool)okObjectResult.Value);
         }
 
         [Theory]
@@ -34,7 +36,7 @@ namespace MontyHall.Web.Test
         public async Task SimulateGames_ChangeDoor_BadRequest(int numberOfSimulations, bool changeDoor)
         {
             var result = await  _montyHallGameController.SimulateGames(numberOfSimulations, changeDoor);
-            Assert.IsType(typeof(BadRequestObjectResult), result);
+            Assert.IsType<BadRequestObjectResult>(result);
         }
     }
 }
