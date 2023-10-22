@@ -17,10 +17,11 @@
 
 # Suggested Backend APIs
 As per requirment # 6, suggested API
-1. GET `/montygame/simulate?numberOfSimulations=int&changeDoor=bool`: returns the result of simulations
+1. GET `/montygame/simulate?numberOfSimulations=int&changeDoor=bool`: returns the result of simulations whether is user winning or not by returning true or false 
 
 # Assumptions
 - No code was provided in the task or unit testing hence the last requirment #10 is not valid
 - Use Test Driven Development for simplicity and targeting requirements
-- For number of doors add configuration file having NumberOfDoors property defaultValue 3 and inject the config in the runtime
 - Use Random C# library for picking the next door
+- For simplicity backend stores default value for number of doors
+- For simplicity backend randmoly choose user door in each iteration
