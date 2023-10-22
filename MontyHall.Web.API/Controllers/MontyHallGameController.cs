@@ -1,19 +1,23 @@
 using Microsoft.AspNetCore.Mvc;
+using MontyHall.Service;
 
 namespace MontyHall.Web.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("montygame")]
     public class MontyHallGameController : ControllerBase
     {
-        public MontyHallGameController()
+        private readonly IMontyHallGameService _montyHallGameService;
+        public MontyHallGameController(IMontyHallGameService montyHallGameService)
         {
+            _montyHallGameService = montyHallGameService;
         }
 
         [HttpGet]
-        public OkObjectResult SimulateGames(int numberOfSimulations, bool changeDoor)
+        [Route("simulate")]
+        public async Task<OkObjectResult> SimulateGames([FromQuery] int numberOfSimulations, [FromQuery] bool changeDoor)
         {
-            bool isWinner = false;
+            bool isWinner = await Task.Run(()=> _montyHallGameService.SimulateGame(numberOfSimulations, changeDoor));
             return Ok(isWinner);
         }
     }
