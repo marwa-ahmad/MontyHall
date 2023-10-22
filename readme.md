@@ -30,5 +30,5 @@ As per requirment # 6, suggested API
 - Success response with status code 200 OK
 ![Swagger](SwaggerOutput.jpg)
 
-- BadRequest response with status code 200 OK
+- BadRequest response with status code 400 OK
 ![BadRequestResult](BadRequestResult.png)
