@@ -25,3 +25,6 @@ As per requirment # 6, suggested API
 - Use Random C# library for picking the next door
 - For simplicity backend stores default value for number of doors
 - For simplicity backend randmoly choose user door in each iteration
+
+# API Documentation & trial in Swagger
+![Swagger](SwaggerOutput.jpg)
