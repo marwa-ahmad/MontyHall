@@ -1,4 +1,11 @@
+# GithubActions status
 [![.NET](https://github.com/marwa-ahmad/MontyHall/actions/workflows/dotnet.yml/badge.svg?branch=master)](https://github.com/marwa-ahmad/MontyHall/actions/workflows/dotnet.yml)
+
+Added simple job to build the repository with steps
+1. Retore dependancies
+2. Build
+3. Test
+
 # Requirements
 
 1. The concept of the game is that the player sees three closed doors behind one is a car. and behind the other two are goats.
